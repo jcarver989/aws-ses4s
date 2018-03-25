@@ -36,7 +36,7 @@ val emailService = EmailServiceImpl() // for default region, or pass in a Amazon
 OR 
 
 ```scala
-import com.amazonaws.services.simpleemail.{ AmazonSimpleEmailService, AmazonSimpleEmailServiceClientBuilder }
+import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder
 import ses4s._
 
 val client = AmazonSimpleEmailServiceClientBuilder.standard().withRegion(Regions.US_EAST_1).build()
