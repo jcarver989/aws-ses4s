@@ -3,6 +3,9 @@ name := "aws-ses4s"
 organization := "com.jcarver989"
 version := "1.0.0"
 
+licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0"))
+
+
 
 // Repositories
 
