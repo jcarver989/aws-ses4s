@@ -53,8 +53,9 @@ val emailService = new EmailServiceImpl(client)
    fromEmail = "stewie.griffin@gmail.com",
    toEmail = "peter.griffin@gmail.com",
    subject = "Ha ha, ha hahaha",
-   content = HTML("<h1>Victory is mine!</h1>")
- ))
+   content = HTML("<h1>Victory is mine!</h1>"
+   headers = Map("Foo" -> "Bar") // optional custom email headers
+ )))
 ```
 
 #### Text 

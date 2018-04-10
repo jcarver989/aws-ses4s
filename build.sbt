@@ -1,7 +1,7 @@
 scalaVersion := "2.12.4"
 name := "aws-ses4s"
 organization := "com.jcarver989"
-version := "1.0.1"
+version := "1.0.2"
 
 licenses += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0"))
 

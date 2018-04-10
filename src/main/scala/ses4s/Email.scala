@@ -17,7 +17,9 @@ case class Email(
   toEmail:     String,
   subject:     String,
   content:     EmailContent,
-  attachments: Seq[Attachment] = Seq.empty) {
+  attachments: Seq[Attachment] = Seq.empty,
+  headers: Map[String, String] = Map()
+  ) {
 
   def toRawMessage: RawMessage = {
     val session = Session.getDefaultInstance(new Properties())
@@ -26,6 +28,9 @@ case class Email(
     message.setFrom(new InternetAddress(fromEmail, fromName))
     message.setRecipients(Message.RecipientType.TO, toEmail)
     message.setContent(createMessageContent)
+    
+    headers.foreach { case (h,v) => message.setHeader(h, v) }
+    
     val output = new ByteArrayOutputStream()
     message.writeTo(output)
     new RawMessage(ByteBuffer.wrap(output.toByteArray()))

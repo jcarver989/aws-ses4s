@@ -30,6 +30,13 @@ class EmailTest extends FlatSpec with Matchers {
     text should include(base64Encode("<h1>Hello World</h1>"))
   }
 
+  it should "set custom headers" in {
+    val rawEmail = Email(from, fromName, to, "You've Won!!!", HTML("<h1>Hello World</h1>"), headers = Map("FooBar" -> "Baz")).toRawMessage
+    val text = rawMessageToString(rawEmail)
+    text should include("FooBar: Baz")
+
+  }
+
   private def base64Encode(string: String): String = {
     new String(Base64.getEncoder.encode(string.getBytes), StandardCharsets.UTF_8)
   }
