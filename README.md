@@ -49,8 +49,9 @@ val emailService = new EmailServiceImpl(client)
 
 ```scala
  emailService.sendEmail(Email(
-   from = "stewie.griffin@gmail.com",
-   to = "peter.griffin@gmail.com",
+   fromName = "Stewie Griffin (Baby Genius)",
+   fromEmail = "stewie.griffin@gmail.com",
+   toEmail = "peter.griffin@gmail.com",
    subject = "Ha ha, ha hahaha",
    content = HTML("<h1>Victory is mine!</h1>")
  ))

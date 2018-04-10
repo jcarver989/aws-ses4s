@@ -8,10 +8,12 @@ import java.util.Base64
 class EmailTest extends FlatSpec with Matchers {
   private val to = "foo@gmail.com"
   private val from = "boo@gmail.com"
+  private val fromName = "Boo McBoo"
 
   it should "send a text email" in {
-    val rawEmail = Email(from, to, "You've Won!!!", Text("Hello World")).toRawMessage
+    val rawEmail = Email(from, fromName, to, "You've Won!!!", Text("Hello World")).toRawMessage
     val text = rawMessageToString(rawEmail)
+    text should include("From: Boo McBoo <boo@gmail.com>")
     text should include("Subject: You've Won!!!")
     text should include("Content-Type: multipart/mixed;")
     text should include("Content-Type: text/plain; charset=UTF-8")
@@ -19,8 +21,9 @@ class EmailTest extends FlatSpec with Matchers {
   }
 
   it should "send an HTML email" in {
-    val rawEmail = Email(from, to, "You've Won!!!", HTML("<h1>Hello World</h1>")).toRawMessage
+    val rawEmail = Email(from, fromName, to, "You've Won!!!", HTML("<h1>Hello World</h1>")).toRawMessage
     val text = rawMessageToString(rawEmail)
+    text should include("From: Boo McBoo <boo@gmail.com>")
     text should include("Subject: You've Won!!!")
     text should include("Content-Type: multipart/mixed;")
     text should include("Content-Type: text/html; charset=UTF-8")

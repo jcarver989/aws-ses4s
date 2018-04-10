@@ -12,8 +12,9 @@ import javax.mail.internet.{ InternetAddress, MimeBodyPart, MimeMessage, MimeMul
 import javax.mail.util.ByteArrayDataSource
 
 case class Email(
-  from:        String,
-  to:          String,
+  fromEmail:   String,
+  fromName:    String,
+  toEmail:     String,
   subject:     String,
   content:     EmailContent,
   attachments: Seq[Attachment] = Seq.empty) {
@@ -22,8 +23,8 @@ case class Email(
     val session = Session.getDefaultInstance(new Properties())
     val message = new MimeMessage(session)
     message.setSubject(subject, "UTF-8")
-    message.setFrom(new InternetAddress(from))
-    message.setRecipients(Message.RecipientType.TO, to)
+    message.setFrom(new InternetAddress(fromEmail, fromName))
+    message.setRecipients(Message.RecipientType.TO, toEmail)
     message.setContent(createMessageContent)
     val output = new ByteArrayOutputStream()
     message.writeTo(output)
