@@ -22,8 +22,11 @@ import javax.mail.util.ByteArrayDataSource
  *
  */
 class EmailServiceImpl(client: AmazonSimpleEmailService) extends EmailService {
-  override def sendEmail(email: Email): Unit = {
-    val request = new SendRawEmailRequest(email.toRawMessage)
+  override def sendEmail(email: Email, sourceArn: Option[String] = None): Unit = {
+    val request = sourceArn match {
+      case Some(arn) => new SendRawEmailRequest(email.toRawMessage).withSourceArn(arn)
+      case None      => new SendRawEmailRequest(email.toRawMessage)
+    }
     client.sendRawEmail(request)
   }
 }
